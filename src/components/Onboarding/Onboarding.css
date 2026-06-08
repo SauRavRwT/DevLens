@@ -10,44 +10,6 @@
   padding-bottom: 5rem;
 }
 
-.hero-logo-box {
-  width: 80px;
-  height: 80px;
-  border-radius: 20px;
-  background: rgba(139, 92, 246, 0.1);
-  border: 1px solid rgba(139, 92, 246, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary);
-  margin-bottom: 1.5rem;
-  box-shadow: var(--shadow-glow);
-  animation: pulse-glow 3s infinite;
-}
-
-.onboarding-title {
-  font-size: 3.2rem;
-  line-height: 1.1;
-  margin-bottom: 1rem;
-  background: linear-gradient(
-    135deg,
-    #ffffff 30%,
-    var(--text-secondary) 70%,
-    var(--primary) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 800;
-}
-
-.onboarding-desc {
-  font-size: 1.15rem;
-  color: var(--text-secondary);
-  margin-bottom: 2.5rem;
-  max-width: 500px;
-}
-
 .search-form {
   width: 100%;
   margin-bottom: 3rem;
@@ -59,12 +21,35 @@
   font-size: 1.05rem;
 }
 
-.search-input-container svg {
+/* Onboarding-specific Search Input Styles */
+.search-input-icon {
   position: absolute;
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.search-input-field {
+  width: 100%;
+  padding: 0.9rem 1rem 0.9rem 2.75rem;
+  height: 54px;
+  font-size: 1.05rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border-radius: 14px;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.search-input-field:focus {
+  border-color: var(--glass-border-focus);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .quickstart-section {
@@ -135,24 +120,6 @@
     padding-bottom: 3rem;
   }
 
-  .hero-logo-box {
-    width: 64px;
-    height: 64px;
-  }
-
-  .onboarding-title {
-    font-size: 2.2rem;
-  }
-
-  .onboarding-desc {
-    font-size: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .search-btn {
-    padding: 0.85rem 1rem;
-  }
-
   .quickstart-section {
     padding-top: 1.25rem;
   }
@@ -166,9 +133,6 @@
     width: 100%;
   }
 
-  .search-input-container {
-    width: 100%;
-  }
 }
 
 .quickstart-name {

@@ -283,44 +283,52 @@ export default function Dashboard({
         )}
 
         {/* Navigation Tabs */}
-        <div
-          className="btn-group dashboard-tabs mb-4"
-          role="group"
-          aria-label="Dashboard sections"
-        >
-          <button
-            type="button"
-            className={`btn btn-outline-secondary ${activeTab === "overview" ? "active btn-primary" : ""}`}
-            onClick={() => setActiveTab("overview")}
+        <div className="dashboard-tabs-wrapper mb-4">
+          <div
+            className="row g-2"
+            role="group"
+            aria-label="Dashboard sections"
           >
-            <BarChart3
-              size={16}
-              style={{ marginRight: "0.35rem", verticalAlign: "middle" }}
-            />
-            Overview
-          </button>
-          <button
-            type="button"
-            className={`btn btn-outline-secondary ${activeTab === "repos" ? "active btn-primary" : ""}`}
-            onClick={() => setActiveTab("repos")}
-          >
-            <BookOpen
-              size={16}
-              style={{ marginRight: "0.35rem", verticalAlign: "middle" }}
-            />
-            Repositories & READMEs
-          </button>
-          <button
-            type="button"
-            className={`btn btn-outline-secondary ${activeTab === "ai-report" ? "active btn-primary" : ""}`}
-            onClick={() => setActiveTab("ai-report")}
-          >
-            <FileText
-              size={16}
-              style={{ marginRight: "0.35rem", verticalAlign: "middle" }}
-            />
-            Career & Resume Insights
-          </button>
+            <div className="col-12 col-md-4">
+              <button
+                type="button"
+                className={`btn w-100 btn-outline-secondary ${activeTab === "overview" ? "active btn-primary" : ""}`}
+                onClick={() => setActiveTab("overview")}
+              >
+                <BarChart3
+                  size={16}
+                  style={{ marginRight: "0.35rem", verticalAlign: "middle" }}
+                />
+                Overview
+              </button>
+            </div>
+            <div className="col-12 col-md-4">
+              <button
+                type="button"
+                className={`btn w-100 btn-outline-secondary ${activeTab === "repos" ? "active btn-primary" : ""}`}
+                onClick={() => setActiveTab("repos")}
+              >
+                <BookOpen
+                  size={16}
+                  style={{ marginRight: "0.35rem", verticalAlign: "middle" }}
+                />
+                Repositories & READMEs
+              </button>
+            </div>
+            <div className="col-12 col-md-4">
+              <button
+                type="button"
+                className={`btn w-100 btn-outline-secondary ${activeTab === "ai-report" ? "active btn-primary" : ""}`}
+                onClick={() => setActiveTab("ai-report")}
+              >
+                <FileText
+                  size={16}
+                  style={{ marginRight: "0.35rem", verticalAlign: "middle" }}
+                />
+                Career & Resume Insights
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Tab 1: OVERVIEW TAB */}

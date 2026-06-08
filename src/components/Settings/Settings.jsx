@@ -64,11 +64,12 @@ export default function Settings({
                 Create token
               </a>
             </label>
-            <div className="search-input-container">
+            <div className="position-relative">
               <input
                 id="github-token-input"
                 type={showToken ? "text" : "password"}
                 className="input-field"
+                style={{ paddingRight: "2.5rem" }}
                 placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
                 value={token}
                 onChange={(e) => setToken(e.target.value)}
@@ -78,7 +79,7 @@ export default function Settings({
                 className="modal-close"
                 style={{
                   position: "absolute",
-                  right: "40px",
+                  right: "0.75rem",
                   top: "50%",
                   transform: "translateY(-50%)",
                 }}
@@ -105,11 +106,12 @@ export default function Settings({
                 Get Gemini Key
               </a>
             </label>
-            <div className="search-input-container">
+            <div className="position-relative">
               <input
                 id="gemini-key-input"
                 type={showApiKey ? "text" : "password"}
                 className="input-field"
+                style={{ paddingRight: "2.5rem" }}
                 placeholder="AIzaSyxxxxxxxxxxxxxxxxxxxx"
                 value={apiKey}
                 onChange={(e) => setApiKey(e.target.value)}
@@ -119,7 +121,7 @@ export default function Settings({
                 className="modal-close"
                 style={{
                   position: "absolute",
-                  right: "40px",
+                  right: "0.75rem",
                   top: "50%",
                   transform: "translateY(-50%)",
                 }}

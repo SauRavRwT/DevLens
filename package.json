@@ -1,5 +1,6 @@
 {
   "name": "devlens",
+  "homepage": "https://sauravrwt.github.io/DevLens/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,14 +8,18 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
     "framer-motion": "^12.40.0",
+    "gh-pages": "^6.3.0",
     "lucide-react": "^1.17.0",
     "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "react-dom": "^19.2.6",
+    "react-router-dom": "^7.17.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",

@@ -1,26 +1,23 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Search, Settings as SettingsIcon } from "lucide-react";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import "./Onboarding.css";
 
-export default function Onboarding({
-  onSubmit,
-  isLoading,
-  onOpenSettings,
-  hasGithubToken,
-  hasGeminiKey,
-}) {
+export default function Onboarding() {
   const [username, setUsername] = useState("");
+  const navigate = useNavigate();
+  const { githubToken, geminiApiKey, setIsSettingsOpen } = useOutletContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username.trim()) {
-      onSubmit(username.trim());
+      navigate(`/dashboard/${encodeURIComponent(username.trim())}`);
     }
   };
 
   const handleQuickstart = (name) => {
-    onSubmit(name);
+    navigate(`/dashboard/${encodeURIComponent(name)}`);
   };
 
   const popularProfiles = [
@@ -50,6 +47,9 @@ export default function Onboarding({
     },
   ];
 
+  const hasGithubToken = !!githubToken;
+  const hasGeminiKey = !!geminiApiKey;
+
   return (
     <motion.div
       className="onboarding-wrap animate-fade-in mx-auto"
@@ -63,7 +63,7 @@ export default function Onboarding({
         className="search-form row gy-3 gx-3 align-items-end"
       >
         <div className="col-12 col-md-8">
-          <div className="search-input-container">
+          <div className="position-relative">
             <svg
               viewBox="0 0 24 24"
               width="20"
@@ -79,12 +79,11 @@ export default function Onboarding({
             </svg>
             <input
               type="text"
-              className="input-field"
+              className="search-input-field"
               id="github-username-input"
               placeholder="Enter GitHub username..."
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              disabled={isLoading}
               required
               autoComplete="off"
               autoFocus
@@ -96,19 +95,10 @@ export default function Onboarding({
           <button
             type="submit"
             className="btn btn-primary search-btn"
-            disabled={isLoading || !username.trim()}
+            disabled={!username.trim()}
           >
-            {isLoading ? (
-              <div
-                className="spinner"
-                style={{ width: "20px", height: "20px", borderWidth: "2px" }}
-              />
-            ) : (
-              <>
-                <Search size={18} />
-                Analyze
-              </>
-            )}
+            <Search size={18} />
+            Analyze
           </button>
         </div>
       </form>
@@ -150,7 +140,7 @@ export default function Onboarding({
         </span>
         <span className="d-none d-sm-inline">•</span>
         <button
-          onClick={onOpenSettings}
+          onClick={() => setIsSettingsOpen(true)}
           className="btn btn-link p-0 text-primary fw-semibold d-flex align-items-center gap-1"
           type="button"
         >
@@ -162,14 +152,13 @@ export default function Onboarding({
       {/* Quickstart Grid */}
       <div className="quickstart-section">
         <h3 className="quickstart-title">Quick-Start Sandbox Profiles</h3>
-        <div className="quickstart-grid row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-2">
+        <div className="quickstart-grid d-flex justify-content-center g-3 row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-2">
           {popularProfiles.map((profile) => (
             <div key={profile.login} className="col" style={{ width: "auto" }}>
               <button
                 type="button"
                 className="quickstart-card btn btn-outline-secondary w-100 h-100 text-start"
                 onClick={() => handleQuickstart(profile.login)}
-                disabled={isLoading}
               >
                 <img
                   className="quickstart-avatar rounded-circle"
