@@ -41,7 +41,7 @@ export default function Error() {
         <h2 className="mb-3" style={{ fontSize: "1.75rem", fontWeight: 700 }}>
           Page Not Found
         </h2>
-        
+
         <p
           className="text-secondary mb-4"
           style={{ fontSize: "0.95rem", lineHeight: "1.6" }}

@@ -106,133 +106,136 @@ export default function Dashboard({
       {/* Left Column: Profile Card */}
       <aside className="col-12 col-lg-4 mb-4">
         <div className="glass-panel profile-card h-100">
-        <div className="profile-avatar-wrapper text-center mb-4 position-relative">
-          <img
-            className="profile-avatar rounded-circle mx-auto shadow-sm"
-            src={profileData.avatar_url}
-            alt={profileData.name || profileData.login}
-          />
-          <div
+          <div className="profile-avatar-wrapper text-center mb-4 position-relative">
+            <img
+              className="profile-avatar rounded-circle mx-auto shadow-sm"
+              src={profileData.avatar_url}
+              alt={profileData.name || profileData.login}
+            />
+            <div
+              style={{
+                position: "absolute",
+                bottom: "-20px",
+                right: "-20px",
+                background: "var(--bg)",
+                borderRadius: "50%",
+                padding: "4px",
+                boxShadow: "var(--shadow-md)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <RadialScore score={analyzedData.overallScore} size={64} />
+            </div>
+          </div>
+
+          <h2 className="profile-name">
+            {profileData.name || profileData.login}
+          </h2>
+          <a
+            href={profileData.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="profile-login"
             style={{
-              position: "absolute",
-              bottom: "-20px",
-              right: "-20px",
-              background: "var(--bg)",
-              borderRadius: "50%",
-              padding: "4px",
-              boxShadow: "var(--shadow-md)",
-              display: "flex",
+              display: "inline-flex",
               alignItems: "center",
-              justifyContent: "center",
+              gap: "0.25rem",
             }}
           >
-            <RadialScore score={analyzedData.overallScore} size={64} />
-          </div>
-        </div>
+            @{profileData.login}
+            <ArrowUpRight size={12} />
+          </a>
 
-        <h2 className="profile-name">
-          {profileData.name || profileData.login}
-        </h2>
-        <a
-          href={profileData.html_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="profile-login"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.25rem",
-          }}
-        >
-          @{profileData.login}
-          <ArrowUpRight size={12} />
-        </a>
+          {profileData.bio && <p className="profile-bio">{profileData.bio}</p>}
 
-        {profileData.bio && <p className="profile-bio">{profileData.bio}</p>}
-
-        <div className="profile-details">
-          {profileData.company && (
+          <div className="profile-details">
+            {profileData.company && (
+              <div className="profile-detail-item">
+                <Building size={14} />
+                <span>{profileData.company}</span>
+              </div>
+            )}
+            {profileData.location && (
+              <div className="profile-detail-item">
+                <MapPin size={14} />
+                <span>{profileData.location}</span>
+              </div>
+            )}
+            {profileData.blog && (
+              <div className="profile-detail-item">
+                <LinkIcon size={14} />
+                <a
+                  href={
+                    profileData.blog.startsWith("http")
+                      ? profileData.blog
+                      : `https://${profileData.blog}`
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    color: "var(--text-secondary)",
+                    textDecoration: "none",
+                  }}
+                >
+                  {profileData.blog.replace(/(^\w+:|^)\/\//, "")}
+                </a>
+              </div>
+            )}
             <div className="profile-detail-item">
-              <Building size={14} />
-              <span>{profileData.company}</span>
+              <Calendar size={14} />
+              <span>
+                Joined{" "}
+                {new Date(profileData.created_at).toLocaleDateString(
+                  undefined,
+                  {
+                    year: "numeric",
+                    month: "short",
+                  },
+                )}
+              </span>
             </div>
-          )}
-          {profileData.location && (
-            <div className="profile-detail-item">
-              <MapPin size={14} />
-              <span>{profileData.location}</span>
-            </div>
-          )}
-          {profileData.blog && (
-            <div className="profile-detail-item">
-              <LinkIcon size={14} />
-              <a
-                href={
-                  profileData.blog.startsWith("http")
-                    ? profileData.blog
-                    : `https://${profileData.blog}`
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: "var(--text-secondary)",
-                  textDecoration: "none",
-                }}
-              >
-                {profileData.blog.replace(/(^\w+:|^)\/\//, "")}
-              </a>
-            </div>
-          )}
-          <div className="profile-detail-item">
-            <Calendar size={14} />
-            <span>
-              Joined{" "}
-              {new Date(profileData.created_at).toLocaleDateString(undefined, {
-                year: "numeric",
-                month: "short",
-              })}
-            </span>
           </div>
-        </div>
 
-        <div className="profile-stats-mini row g-2 text-center">
-          <div className="mini-stat-box col">
-            <span className="mini-stat-val">{analyzedData.totalRepos}</span>
-            <span className="mini-stat-lbl">Repos</span>
+          <div className="profile-stats-mini row g-2 text-center">
+            <div className="mini-stat-box col">
+              <span className="mini-stat-val">{analyzedData.totalRepos}</span>
+              <span className="mini-stat-lbl">Repos</span>
+            </div>
+            <div className="mini-stat-box col">
+              <span className="mini-stat-val">{profileData.followers}</span>
+              <span className="mini-stat-lbl">Followers</span>
+            </div>
+            <div className="mini-stat-box col">
+              <span className="mini-stat-val">{analyzedData.totalStars}</span>
+              <span className="mini-stat-lbl">Stars</span>
+            </div>
           </div>
-          <div className="mini-stat-box col">
-            <span className="mini-stat-val">{profileData.followers}</span>
-            <span className="mini-stat-lbl">Followers</span>
-          </div>
-          <div className="mini-stat-box col">
-            <span className="mini-stat-val">{analyzedData.totalStars}</span>
-            <span className="mini-stat-lbl">Stars</span>
-          </div>
-        </div>
 
-        <div className="d-grid gap-2 mt-4">
-          <button
-            onClick={onReset}
-            className="btn btn-secondary"
-            style={{ width: "100%" }}
-          >
-            <RotateCcw size={16} />
-            Analyze New User
-          </button>
-          <button
-            onClick={onOpenSettings}
-            className="btn btn-secondary"
-            style={{
-              width: "100%",
-              borderColor: "rgba(255,255,255,0.03)",
-              fontSize: "0.8rem",
-              padding: "0.5rem",
-            }}
-          >
-            <SettingsIcon size={14} />
-            Adjust API Keys
-          </button>
-        </div>
+          <div className="d-grid gap-2 mt-4">
+            <button
+              onClick={onReset}
+              className="btn btn-secondary"
+              style={{ width: "100%" }}
+            >
+              <RotateCcw size={16} />
+              Analyze New User
+            </button>
+            <button
+              onClick={onOpenSettings}
+              className="btn btn-secondary"
+              style={{
+                width: "100%",
+                borderColor: "rgba(255,255,255,0.03)",
+                fontSize: "0.8rem",
+                padding: "0.5rem",
+              }}
+            >
+              <SettingsIcon size={14} />
+              Adjust API Keys
+            </button>
+          </div>
         </div>
       </aside>
 
@@ -284,11 +287,7 @@ export default function Dashboard({
 
         {/* Navigation Tabs */}
         <div className="dashboard-tabs-wrapper mb-4">
-          <div
-            className="row g-2"
-            role="group"
-            aria-label="Dashboard sections"
-          >
+          <div className="row g-2" role="group" aria-label="Dashboard sections">
             <div className="col-12 col-md-4">
               <button
                 type="button"
@@ -490,7 +489,10 @@ export default function Dashboard({
                     Last Push: {analyzedData.activity.lastPushDate || "Unknown"}
                   </p>
                   <p
-                    style={{ fontSize: "0.8rem", color: "var(--text-secondary)" }}
+                    style={{
+                      fontSize: "0.8rem",
+                      color: "var(--text-secondary)",
+                    }}
                   >
                     {analyzedData.activity.description}
                   </p>
@@ -502,8 +504,8 @@ export default function Dashboard({
                     }}
                   >
                     Analyzed <strong>{analyzedData.originalReposCount}</strong>{" "}
-                    source codebases and <strong>{analyzedData.forkRepos}</strong>{" "}
-                    repository forks.
+                    source codebases and{" "}
+                    <strong>{analyzedData.forkRepos}</strong> repository forks.
                   </p>
                 </div>
               </div>
@@ -795,7 +797,10 @@ export default function Dashboard({
               <div className="col">
                 <article className="glass-panel h-100">
                   <h3 className="ai-section-title">
-                    <CheckCircle size={18} style={{ color: "var(--success)" }} />
+                    <CheckCircle
+                      size={18}
+                      style={{ color: "var(--success)" }}
+                    />
                     Key Strengths
                   </h3>
                   <ul className="insight-bullets-list">
@@ -822,7 +827,10 @@ export default function Dashboard({
               <div className="col">
                 <article className="glass-panel h-100">
                   <h3 className="ai-section-title">
-                    <AlertTriangle size={18} style={{ color: "var(--danger)" }} />
+                    <AlertTriangle
+                      size={18}
+                      style={{ color: "var(--danger)" }}
+                    />
                     Constructive Feedback
                   </h3>
                   <ul className="insight-bullets-list">

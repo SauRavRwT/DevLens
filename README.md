@@ -8,6 +8,8 @@ Built with a modern glassmorphism aesthetic, DevLens helps developers optimize t
 
 ---
 
+![DevLens-sample](./images/sample.png)
+
 ## Key Features
 
 - **Comprehensive Portfolio Heuristics**: Analyzes public repositories to compute total stars, forks, open issues, and primary language weights. It factors in recent push history to deliver an overall portfolio health score.
@@ -37,6 +39,7 @@ Built with a modern glassmorphism aesthetic, DevLens helps developers optimize t
 
 ```text
 devlens/
+├── images/                 # sample images
 ├── public/                 # Static assets
 ├── src/
 │   ├── assets/             # Images and design resources

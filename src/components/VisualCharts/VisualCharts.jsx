@@ -47,7 +47,11 @@ export function RadialScore({ score, label, size = 120 }) {
       style={{ flexDirection: "column", gap: "0.5rem" }}
     >
       <div style={{ position: "relative", width: size, height: size }}>
-        <svg width={size} height={size} style={{ transform: "rotate(-90deg)", overflow: "visible" }}>
+        <svg
+          width={size}
+          height={size}
+          style={{ transform: "rotate(-90deg)", overflow: "visible" }}
+        >
           {/* Background circle */}
           <circle
             cx={size / 2}

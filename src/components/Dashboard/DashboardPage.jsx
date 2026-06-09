@@ -22,37 +22,40 @@ export default function DashboardPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const loadUserData = useCallback(async (targetUsername) => {
-    setIsLoading(true);
-    setErrorMessage("");
-    setAnalyzedData(null);
-    setAiReport(null);
+  const loadUserData = useCallback(
+    async (targetUsername) => {
+      setIsLoading(true);
+      setErrorMessage("");
+      setAnalyzedData(null);
+      setAiReport(null);
 
-    try {
-      // 1. Fetch profile info
-      const profile = await fetchGitHubProfile(targetUsername, githubToken);
-      setProfileData(profile);
+      try {
+        // 1. Fetch profile info
+        const profile = await fetchGitHubProfile(targetUsername, githubToken);
+        setProfileData(profile);
 
-      // 2. Fetch all public repositories
-      const repos = await fetchGitHubRepos(targetUsername, githubToken);
+        // 2. Fetch all public repositories
+        const repos = await fetchGitHubRepos(targetUsername, githubToken);
 
-      // 3. Perform local calculations
-      const analysis = runPortfolioAnalysis(profile, repos);
-      setAnalyzedData(analysis);
+        // 3. Perform local calculations
+        const analysis = runPortfolioAnalysis(profile, repos);
+        setAnalyzedData(analysis);
 
-      // 4. Generate Career report
-      const report = await generateAiReport(profile, analysis, geminiApiKey);
-      setAiReport(report);
-    } catch (err) {
-      console.error(err);
-      setErrorMessage(
-        err.message || "An unexpected error occurred. Please try again.",
-      );
-      setProfileData(null);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [githubToken, geminiApiKey, setProfileData]);
+        // 4. Generate Career report
+        const report = await generateAiReport(profile, analysis, geminiApiKey);
+        setAiReport(report);
+      } catch (err) {
+        console.error(err);
+        setErrorMessage(
+          err.message || "An unexpected error occurred. Please try again.",
+        );
+        setProfileData(null);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [githubToken, geminiApiKey, setProfileData],
+  );
 
   useEffect(() => {
     let active = true;
@@ -74,7 +77,6 @@ export default function DashboardPage() {
       }, 0);
     };
   }, [username, loadUserData, setProfileData]);
-
 
   return (
     <div className="d-flex flex-column flex-grow-1">

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { Sun, Moon, } from "lucide-react";
+import { Sun, Moon } from "lucide-react";
 import Settings from "../Settings/Settings";
 
 export default function MainLayout() {
@@ -32,51 +32,33 @@ export default function MainLayout() {
   return (
     <div className="app-container container py-4 animate-fade-in">
       {/* Navigation Header */}
-      <header className="app-header d-flex flex-column flex-md-row align-items-start justify-content-between gap-3 mb-4">
-        <div className="d-flex align-items-center gap-3">
-          <div>
-            <button
-              onClick={handleLogoClick}
-              className="btn btn-link p-0 text-decoration-none text-white cursor-pointer"
-              style={{ display: "inline-flex", alignItems: "center" }}
-            >
-              <h1 className="app-title mb-1 hero-logo-box">DevLens</h1>
-            </button>
-            <p className="app-desc mb-0">
-              Evaluate your public GitHub repositories, calculate complexity
-              metrics, score README documentation, and generate career insights.
-            </p>
-          </div>
+      <header className="app-header">
+        <div className="logo-block">
+          <h1
+            className="app-title mb-0 hero-logo-box"
+            onClick={handleLogoClick}
+            style={{ cursor: "pointer" }}
+          >
+            DevLens
+          </h1>
+          <p className="app-desc mb-0">
+            Evaluate your public GitHub repositories, calculate complexity
+            metrics, score README documentation, and generate career insights.
+          </p>
         </div>
 
-        <div className="header-actions d-flex align-items-center gap-2">
+        {/* Theme toggle */}
+        <div className="header-actions">
           <button
             type="button"
-            className="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1"
+            className="btn btn-sm d-inline-flex align-items-center gap-1 text-secondary"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           >
             {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-            {theme === "dark" ? "Light" : "Dark"}
+            <span className="d-none d-sm-inline">
+              {theme === "dark" ? "Light" : "Dark"}
+            </span>
           </button>
-
-          {profileData && (
-            <div className="ai-status-indicator d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill border">
-              <img
-                src={profileData.avatar_url}
-                alt={profileData.login}
-                className="rounded-circle"
-                style={{
-                  width: "32px",
-                  height: "32px",
-                  objectFit: "cover",
-                  border: "1px solid rgba(255,255,255,0.15)",
-                }}
-              />
-              <span>
-                User: <strong>{profileData.login}</strong>
-              </span>
-            </div>
-          )}
         </div>
       </header>
 
@@ -102,8 +84,15 @@ export default function MainLayout() {
           DevLens — AI GitHub Portfolio Recruiter Assessment
         </p>
         <p className="mb-0 small opacity-75">
-          Client-side evaluation. Your GitHub and Gemini credentials never leave
-          your browser.
+          Made with ❤️ by{" "}
+          <a
+            href="https://github.com/SauRavRwT"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-decoration-none"
+          >
+            Balbheji
+          </a>
         </p>
       </footer>
 

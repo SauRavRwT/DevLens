@@ -1,13 +1,13 @@
 .onboarding-wrap {
-  flex: 1;
+  width: 100%;
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 650px;
-  margin: 2rem auto;
   text-align: center;
-  padding-bottom: 5rem;
 }
 
 .search-form {
@@ -19,6 +19,18 @@
   height: 54px;
   padding: 0 2rem;
   font-size: 1.05rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border-radius: 14px;
+  transition: all 0.2s ease;
+  animation: pulse-glow 3s infinite;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.1));
+}
+
+.search-btn:hover {
+  background: rgba(139, 92, 246, 0.08);
+  border-color: rgba(139, 92, 246, 0.3);
 }
 
 /* Onboarding-specific Search Input Styles */
@@ -132,7 +144,6 @@
     padding: 1rem;
     width: 100%;
   }
-
 }
 
 .quickstart-name {

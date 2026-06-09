@@ -94,7 +94,7 @@ export default function Onboarding() {
         <div className="col-12 col-md-4 d-grid">
           <button
             type="submit"
-            className="btn btn-primary search-btn"
+            className="btn search-btn"
             disabled={!username.trim()}
           >
             <Search size={18} />
