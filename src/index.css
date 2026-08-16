@@ -29,8 +29,11 @@
 
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
   --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.7);
-
   --card-bg-alt: rgba(30, 35, 50, 0.9);
+
+  --sans: "Outfit", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --heading: "Outfit", sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 :root[data-theme="light"] {
@@ -71,6 +74,11 @@
   padding: 0;
 }
 
+html {
+  scrollbar-gutter: stable;
+  background-color: var(--bg);
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -99,6 +107,10 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  overflow-x: hidden;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 #root {
